@@ -1,19 +1,31 @@
 class Cliente:
-    def __init__(self, nome, cpf, idade, data_nascimento, num_carteira_motorista, foto_carteira_motorista, ano_vencimento_carteira_motorista, endereco, telefone, email):
+    def __init__(self, nome, cpf, idade, data_nascimento, num_carteira_motorista, ano_vencimento_carteira_motorista, endereco, telefone, email):
         self.nome = nome
         self.cpf = cpf
         self.idade = idade
         self.data_nascimento = data_nascimento
         self.num_carteira_motorista = num_carteira_motorista
-        self.foto_carteira_motorista = foto_carteira_motorista
         self.ano_vencimento_carteira_motorista = ano_vencimento_carteira_motorista
         self.endereco = endereco
         self.telefone = telefone
         self.email = email
 
-cliente1 = Cliente('João', '202.123.565-54', 65, '25/10/1958', 253659326, 'Foto da CNH', '20/05/2025', 'Rua Dr. Blumenau, 65', '47 988953625', 'joãoernesto@gmail.com')
-cliente2 = Cliente('Maria', '302.657.982-15', 45, '12/03/1978', 326618935, 'Foto da CNH', '30/08/2024', 'Rua Tamandaré, 215', '48 999326515', 'mariagenoveva@gmail.com')
-cliente3 = Cliente('Guilherme', '326.256.258-56', 22, '29/10/2000', 326598745, 'Foto da CNH', '03/03/2023', 'Rua Pedro Nestor Neto, 200', '47 988963520','guiperto@gmail.com ')
+class Clientes:
+    def __init__(self):
+        self.clientes = []
+
+    def adicionar_cliente(self, cliente):
+        self.clientes.append(cliente)
+
+    def buscar_cliente_nome(self, nome):
+        for cliente in self.clientes:
+            if cliente.nome == nome:
+                return cliente
+        return None
+
+cliente1 = Cliente('João', '202.123.565-54', 65, '25/10/1958', 253659326, '20/05/2025', 'Rua Dr. Blumenau, 65', '47 988953625', 'joãoernesto@gmail.com')
+cliente2 = Cliente('Maria', '302.657.982-15', 45, '12/03/1978', 326618935, '30/08/2024', 'Rua Tamandaré, 215', '48 999326515', 'mariagenoveva@gmail.com')
+cliente3 = Cliente('Guilherme', '326.256.258-56', 22, '29/10/2000', 326598745, '03/03/2023', 'Rua Pedro Nestor Neto, 200', '47 988963520','guiperto@gmail.com ')
 
 
 class Funcionario:
@@ -30,7 +42,7 @@ class Funcionario:
 
 func1 = Funcionario('Miguel', '258.326.285-56', 35, 'Rua  Miguel José, 325', '16/08/2017', 'R$2.700,00', '9', '47 988569230')
 func1.status = False
-func2 = Funcionario('Luana', '203.268.268-69', '40', 'Rua Joana Silva, 1230', '01/02/2019', 'R$2.300,00', '7', '47 989896253')
+func2 = Funcionario('Luana', '203.268.268-69', 40, 'Rua Joana Silva, 1230', '01/02/2019', 'R$2.300,00', '7', '47 989896253')
 
 class Carro:
     def __init__(self, placa, ano, cor, modelo, quilometragem, valor_diario, observacao):
@@ -69,7 +81,8 @@ class Reserva:
         self.data_inicio = data_inicio
         self.data_fim = data_fim
 
-reserva1 = Reserva('Toro', 'João', '001', 'Ativa', '23/03/2023', '23/04/2023')
+reserva1 = Reserva(carro_utilit1, cliente1, '001', 'Ativa', '22/03/2023', '23/05/2023')
+reserva2 = Reserva(carro_esportivo1, cliente2, '002', 'Ativa', '15/03/2023', '30/04/2023')
 
 class Promocao:
     def __init__(self, titulo, descricao, data_validade):
@@ -81,21 +94,52 @@ promocao1 = Promocao('10% em um mes', 'Se alugar um carro nosso por um mês ganh
 
 carros = [carro_esportivo1, carro_utilit1, carro_utilit2]
 
-reservas = [reserva1]
+reservas = [reserva1, reserva2]
 
 print('Bem-vindo(a) ao sistema de aluguel de carros!\n')
+
+
+clientes = Clientes()
 
 while True:
     opcao = input('Escolha uma opção:\n1. Realizar reserva\n2. Cancelar reserva\n3. Consultar reservas\n4. Sair\n')
 
     if opcao == '1':
-      for i, Carro in enumerate(carros):
-        print(f'{i} - {carro.modelo} \n')
+        for i, carro in enumerate(carros):
+            print(f'{i} - {carro.modelo} \n')
+        carro_escolhido = int(input('Qual carro é do seu interesse? '))
+        if 0 <= carro_escolhido < len(carros):
+            cliente_escolhido = input('Qual seu nome? ')
+            cliente_existente = clientes.buscar_cliente_nome(cliente_escolhido)
+            if not cliente_existente:
+                # Cadastro de novo cliente
+                cpf_novo_cliente = input('Digite o seu CPF: ')
+                idade_novo_cliente = int(input('Qual a sua idade? '))
+                data_nascimento = input('Qual a sua data de nascimento? ')
+                num_carteira_motorista = int(input('Qual o número da sua CNH? '))
+                ano_vencimento_carteira_motorista = int(input('Qual o ano de vencimento da sua CNH? '))
+                endereco = str(input('Qual a rua que você reside ? '))
+                telefone = int(input('Qual seu número de celular? '))
+                email = input('Informe seu email: ')
+                novo_cliente = Cliente(cliente_escolhido, cpf_novo_cliente, idade_novo_cliente)
+                clientes.adicionar_cliente(novo_cliente)
+                print('Tu foi cadastrado com sucesso!')
+            else:
+                print('Cliente encontrado!')
+            # Realiza a reserva
+            data_inicio = input('Qual a data de reserva (dd/mm/aaaa): ')
+            data_fim = input('Qual a data para a devolução do veículo (dd/mm/aaaa): ')
+            codigo_reserva = input('Informe o código da reserva: ')
+            nova_reserva = Reserva(carros[carro_escolhido], cliente_existente, codigo_reserva, 'Ativa', data_inicio, data_fim)
+            reservas.append(nova_reserva)
+            print('Reserva realizada com sucesso!')
+        else:
+            print('Opção inválida.')
     elif opcao == '2':
         print('Você escolheu cancelar uma reserva.\n')
     elif opcao == '3':
        for i, reserva in enumerate(reservas):
-        print(f'{i} - {reserva.carro}, {reserva.data_inicio}, {reserva.data_fim} \n')
+            print(f'{i} - {reserva.carro.modelo}, {reserva.data_inicio}, {reserva.data_fim} \n')
     elif opcao == '4':
         print('Obrigado por utilizar nosso sistema. Volte sempre!')
         break
