@@ -1,0 +1,14 @@
+#instancias #clientes
+cliente0 = Cliente('João', '202.123.565-54', 65, '25/10/1958', 253659326, '20/05/2025', 'Rua Dr. Blumenau, 65', '47 988953625', 'joãoernesto@gmail.com')
+cliente1 = Cliente('Maria', '302.657.982-15', 45, '12/03/1978', 326618935, '30/08/2024', 'Rua Tamandaré, 215', '48 999326515', 'mariagenoveva@gmail.com')
+cliente2 = Cliente('Guilherme', '326.256.258-56', 22, '29/10/2000', 326598745, '03/03/2027', 'Rua Pedro Nestor Neto, 200', '47 988963520','guiperto@gmail.com')
+
+#instancias #carroEsportivo
+carro_esportivo0 = Esportivo('GHI9012', 2019, 'Branco', 'Camaro', 25000, 'R$300,00', 'Carro impecavél', 5.5, ['Rodas de liga-leve', 'Sistema de som premium'])
+carro_esportivo1 = Esportivo('JLK6587', 2021, 'Cinza', 'Porshe', 5600, 'R$500,00', 'Conversivel', 3.0, ['Sistema de som premium'])
+carro_esportivo2 = Esportivo('ARG2036', 2018, 'Bordo', 'Range Rover', 12000, 'R$390,00', 'Controle de estabilidade e Leitura de pista', 6.0, ['Cambio'])
+carro_esportivo3 = Esportivo('DRS5978', 2022, 'Preto', 'Lamborghini', 8400, 'R$650,00', 'Impecavél', 5.5, ['Não há melhorias a serem feitas'])
+
+#instancias #carroUtilitario
+carro_utilit0 = Utilitario('JKL3456', 2021, 'Prata', 'Hilux', 10000, 'R$250,00', 'Trincado no parabrisa', 5, 'Médio', 10.5)
+carro_utilit1 = Utilitario('KLB2363', 2022, 'Preto', 'Toro', 18000, 'R$300,00', 'Sem obeservação', 5, 'Médio', 12.5)
